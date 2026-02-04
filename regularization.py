@@ -1,16 +1,10 @@
-# ==========================================================
-# IMPORT STATEMENTS
-# ==========================================================
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import ElasticNet, Lasso, Ridge, LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 
-# ==========================================================
-# DATA CREATION (YOUR ORIGINAL PART - UNCHANGED)
-# ==========================================================
+#DATA CREATION (YOUR ORIGINAL PART - UNCHANGED)
 
 np.random.seed(42)
 
@@ -31,17 +25,12 @@ print(f"True coefficients: {true_coef}")
 print(f"Note: Features 3 and 4 should be zero (noise features).")
 print("=" * 50)
 
-# ==========================================================
 # TRAIN-TEST SPLIT
-# ==========================================================
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# ==========================================================
-# MODEL TRAINING (YOUR SAME FORMAT)
-# ==========================================================
 
 # Multiple Linear Regression
 mlr = LinearRegression()
@@ -59,9 +48,7 @@ lasso.fit(X_train, y_train)
 elastic_net = ElasticNet(alpha=1.0, l1_ratio=0.5, max_iter=10000)
 elastic_net.fit(X_train, y_train)
 
-# ==========================================================
-# COEFFICIENT COMPARISON PRINT TABLE (YOUR STYLE)
-# ==========================================================
+
 
 print("\nCoefficients Comparison")
 print("=" * 30)
@@ -77,9 +64,8 @@ for i in range(4):
           f"{elastic_net.coef_[i]:>7.2f}")
 print("-" * 55)
 
-# ==========================================================
+
 # MSE COMPARISON (TEST DATA)
-# ==========================================================
 
 models = {
     "MLR": mlr,
@@ -98,9 +84,7 @@ for name, model in models.items():
 
 print("=" * 40)
 
-# ==========================================================
 # REGULARIZATION TUNING RANGE (FOR ERROR PLOT)
-# ==========================================================
 
 alphas = np.logspace(-2, 3, 20)  # 0.01 to 1000
 
@@ -128,9 +112,7 @@ for alpha in alphas:
     elastic_train_err.append(mean_squared_error(y_train, e.predict(X_train)))
     elastic_test_err.append(mean_squared_error(y_test, e.predict(X_test)))
 
-# ==========================================================
 # PLOTTING (YOUR EXACT STYLE)
-# ==========================================================
 
 plt.style.use('ggplot')
 
@@ -140,9 +122,7 @@ fig.patch.set_facecolor('#FFF7EF')
 line_colors = ['#FF6B6B', '#4ECDC4', '#555555', '#AAAAAA']
 line_widths = [3, 3, 2, 2]
 
-# ============================
 # PLOT 1: COEFFICIENT BAR CHART (YOUR STYLE)
-# ============================
 
 x_pos = np.arange(4)
 width = 0.2
@@ -176,9 +156,7 @@ ax1.axhline(y=0, color='#333333', linestyle='--', linewidth=1.2)
 ax1.spines['top'].set_visible(False)
 ax1.spines['right'].set_visible(False)
 
-# ============================
 # PLOT 2: ELASTIC NET PATH (YOUR STYLE)
-# ============================
 
 l1_ratios = np.linspace(0, 1, 20)
 coefs = [[] for _ in range(4)]

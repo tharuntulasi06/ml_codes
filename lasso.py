@@ -26,7 +26,7 @@ linear_model = Pipeline([
 lasso_model = Pipeline([
     ("poly", PolynomialFeatures(degree=degree, include_bias=True)),
     ("scaler", StandardScaler()),
-    ("lasso", Lasso(alpha=0.05, max_iter=50000)),
+    ("lasso", Lasso(alpha=0.05, max_iter=50000  )),
 ])
 
 linear_model.fit(X_train, y_train)
@@ -46,6 +46,7 @@ plt.scatter(X_train, y_train, label='Training Data')
 plt.plot(X_test, y_true_test, label='True Curve')
 plt.plot(X_test, y_predict_linear_test, label='Linear Model Prediction')
 plt.plot(X_test, y_predict_lasso_test, label='Lasso Model Prediction')
+plt.savefig('lasso_regression.png')
 
 plt.title(f'Linear vs Lasso Regression (Degree={degree})')
 plt.xlabel('X')
